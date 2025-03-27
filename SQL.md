@@ -118,7 +118,7 @@ PRIMARY KEY
   ```
 * We can put literal strings in the output by `SELECT attr1, ',', attr2 FROM table;`.
 
-##### **`WHERE` clause**
+##### The WHERE clause
   ```sql
   SELECT name, species, sex, owner
   FROM pet
@@ -154,7 +154,7 @@ PRIMARY KEY
     XOR<br>
     ||, OR<br>
     ```
-##### `ORDER BY`
+##### Ordering Records
 ```sql
 SELECT ...
 FROM ... 
@@ -162,6 +162,14 @@ WHERE ...
 ORDER BY ...;
 ```
 - `DESC` used for descending order, `ASC` vice-versa.
+
+##### Grouping Records
+```sql
+SELECT attr1, attr2, COUNT(*), MAX(attr3)
+FROM <table-name>
+GROUP BY attr1;
+```
+- While grouping, we can only select columns that have the same value for a group. Selecting names while grouping by species/sex will not work.
 
 ##### Functions (See TB at 556)
 
@@ -194,6 +202,22 @@ DELETE FROM <tablename>
   ADD <attrname> <attr-type>
   [CONSTRAINTS ...];
   ```
+  - Adding a
+    1. Primary key: 
+      ```sql
+      ALTER TABLE <tablename>
+      ADD CONSTRAINT <PK_name> PRIMARY KEY(<attr name>);
+      ```
+    2. Foreign key:
+      ```sql
+      ALTER TABLE <tablename>
+      ADD CONSTRAINT <FK_name> FOREIGN KEY(<attr>) REFERENCES TABLE(<attr-name>);
+      ```
+    3. Check constraint:
+      ```sql
+      ALTER TABLE <tablename>
+      ADD CONSTRAINT <CHECK_CONSTRAINT> CHECK(<attr name> > 0);
+      ```
 - **`MODIFY`**
   - Specify only column-name and modified part. 
   - Modifying datastypes and sizes: `CHAR` -> `VARCHAR` and vice versa is possbile only when all tuples are 
